@@ -39,11 +39,11 @@ def generate_fish_reviver_1_19_2(
     fish_item: ResourceLocation, fish_entity: ResourceLocation
 ) -> DatapackFile:
     function_src = """
-        execute
-            as @e[type=item,distance=..1,nbt={Item: {id: "%s"}}]
-            at @s
-            run summon %s ~ ~ ~ {
-                ActiveEffects: [{Id: 11, Duration: 300, Amplifier: 5, ShowParticles: 1b}]
+        execute \
+            as @e[type=item,distance=..1,nbt={Item: {id: "%s"}}] \
+            at @s \
+            run summon %s ~ ~ ~ { \
+                ActiveEffects: [{Id: 11, Duration: 300, Amplifier: 5, ShowParticles: 1b}] \
             }
     """ % (fish_item, fish_entity)
     function_src = fix_whitespace(function_src)
