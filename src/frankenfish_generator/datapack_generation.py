@@ -33,7 +33,7 @@ def generate_fish_reviver_tag(
         else:
             values.append(
                 {
-                    "id": f"frankenfish:{fish_item.namespace}/{fish_item.path}",
+                    "id": f"frankenfish:{fish_item.namespace}/revive_{fish_item.path}",
                     "required": False,
                 }
             )
