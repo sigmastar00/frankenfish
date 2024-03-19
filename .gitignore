@@ -1,5 +1,6 @@
 .vscode/
 .ruff_cache/
+*.zip
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
