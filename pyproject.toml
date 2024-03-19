@@ -1,0 +1,30 @@
+[project]
+name = "frankenfish-generator"
+version = "0.0.1"
+description = "Default template for PDM package"
+authors = [
+    {name = "sigmastar00", email = "sigmastar00@gmail.com"},
+]
+dependencies = []
+requires-python = "==3.11.*"
+readme = "README.md"
+license = {text = "MIT"}
+
+
+[tool.pdm]
+distribution = false
+
+[tool.pdm.scripts]
+main = "python3 src/main.py"
+typecheck = "mypy src/main.py"
+lint = "ruff check src"
+format = "ruff format src"
+
+[tool.pdm.dev-dependencies]
+dev = [
+    "ruff>=0.3.3",
+    "mypy>=1.9.0",
+]
+
+[tool.mypy]
+strict = true
