@@ -29,10 +29,9 @@ def generate_fish_reviver(
     fish_entity: ResourceLocation,
     minecraft_version: MinecraftVersion,
 ) -> DatapackFile:
-    if minecraft_version == MinecraftVersion.V1_19_2:
-        return generate_fish_reviver_1_19_2(fish_item, fish_entity)
-    else:
-        raise NotImplementedError
+    match minecraft_version:
+        case MinecraftVersion.V1_19_2 | MinecraftVersion.V1_20_1:
+            return generate_fish_reviver_1_19_2(fish_item, fish_entity)
 
 
 def generate_fish_reviver_1_19_2(

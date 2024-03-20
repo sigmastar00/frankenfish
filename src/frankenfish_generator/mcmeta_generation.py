@@ -6,8 +6,8 @@ def generate_mcmeta(minecraft_version: MinecraftVersion) -> DatapackFile:
     match minecraft_version:
         case MinecraftVersion.V1_19_2:
             return generate_mcmeta_1_19_2()
-        case _:
-            raise NotImplementedError
+        case MinecraftVersion.V1_20_1:
+            return generate_mcmeta_1_20_1()
 
 
 def generate_mcmeta_1_19_2() -> DatapackFile:
@@ -17,6 +17,20 @@ def generate_mcmeta_1_19_2() -> DatapackFile:
         {
             "pack": {
                 "pack_format": 10,
+                "description": "Fishify Revivify!"
+            }
+        }
+        """,
+    )
+
+
+def generate_mcmeta_1_20_1() -> DatapackFile:
+    return DatapackFile(
+        "pack.mcmeta",
+        """
+        {
+            "pack": {
+                "pack_format": 15,
                 "description": "Fishify Revivify!"
             }
         }
