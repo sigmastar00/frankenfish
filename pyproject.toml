@@ -1,7 +1,7 @@
 [project]
 name = "frankenfish-generator"
-version = "0.0.1"
-description = "Default template for PDM package"
+version = "1.0.0"
+description = "Code generator for Frankenfish datapack"
 authors = [
     {name = "sigmastar00", email = "sigmastar00@gmail.com"},
 ]
