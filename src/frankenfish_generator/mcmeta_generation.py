@@ -17,7 +17,7 @@ def generate_mcmeta_1_19_2() -> DatapackFile:
         {
             "pack": {
                 "pack_format": 10,
-                "description": "Fishify Revivify!"
+                "description": "Bring your fish to life! Frankenfish for Minecraft 1.19.2"
             }
         }
         """,
@@ -31,7 +31,7 @@ def generate_mcmeta_1_20_1() -> DatapackFile:
         {
             "pack": {
                 "pack_format": 15,
-                "description": "Fishify Revivify!"
+                "description": "Bring your fish to life! Frankenfish for Minecraft 1.20.1"
             }
         }
         """,
