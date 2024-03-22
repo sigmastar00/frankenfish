@@ -39,7 +39,7 @@ def generate_fish_reviver_1_19_2(
 ) -> DatapackFile:
     function_src = """
         execute \
-            as @e[type=item,distance=..1,nbt={Item: {id: "%s"}}] \
+            as @e[type=item,distance=..2,nbt={Item: {id: "%s"}}] \
             at @s \
             run summon %s ~ ~ ~ { \
                 ActiveEffects: [{Id: 11, Duration: 300, Amplifier: 5, ShowParticles: 1b}] \
