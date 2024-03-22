@@ -1,6 +1,9 @@
 media/*
 !media/thumbnail.png
 !media/demonstration.mp4
+!media/screenshot-windup.png
+!media/screenshot-strike.png
+!media/screenshot-fish.png
 
 .vscode/
 .ruff_cache/
