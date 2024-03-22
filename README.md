@@ -8,7 +8,7 @@ At long last, there is now a solution.
 With the power of **⚡Lightning⚡** you can now turn your hard-earned fish supply into vibrant friends for your aquarium!
 This datapack turns any dropped fish item that gets struck by lightning into a living fish mob.
 
-**TODO: Video Here**
+https://github.com/sigmastar00/frankenfish/assets/65141169/fc7707d6-1411-4354-a7a4-34c4fe842a13
 
 ## Compatibility
 
