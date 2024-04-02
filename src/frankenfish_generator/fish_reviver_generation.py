@@ -1,3 +1,4 @@
+from collections.abc import Iterable
 from .minecraft_version import MinecraftVersion
 from .resource_location import ResourceLocation
 from .datapack_file import DatapackFile
@@ -6,14 +7,12 @@ from itertools import starmap
 
 
 def generate_fish_revivers(
-    fishes: list[tuple[ResourceLocation, ResourceLocation]],
+    fishes: Iterable[tuple[ResourceLocation, ResourceLocation]],
     minecraft_version: MinecraftVersion,
-) -> list[DatapackFile]:
-    return list(
-        starmap(
-            lambda item, entity: generate_fish_reviver(item, entity, minecraft_version),
-            fishes,
-        )
+) -> Iterable[DatapackFile]:
+    return starmap(
+        lambda item, entity: generate_fish_reviver(item, entity, minecraft_version),
+        fishes,
     )
 
 
@@ -38,13 +37,12 @@ def generate_fish_reviver_1_19_2(
     fish_item: ResourceLocation, fish_entity: ResourceLocation
 ) -> DatapackFile:
     function_src = """
-        execute \
-            as @e[type=item,distance=..3.2,nbt={Item: {id: "%s"}}] \
-            at @s \
-            run summon %s ~ ~ ~ { \
-                ActiveEffects: [{Id: 11, Duration: 300, Amplifier: 5, ShowParticles: 1b}] \
-            }
-    """ % (fish_item, fish_entity)
+        # give the fish resistance 5 so it doesn't die to lightning
+        summon %s ~ ~ ~ { \
+            ActiveEffects: [{Id: 11, Duration: 300, Amplifier: 5, ShowParticles: 1b}] \
+        }
+        kill @s
+    """ % (fish_entity)
     function_src = fix_whitespace(function_src)
 
     return DatapackFile(fish_reviver_path(fish_item), function_src)
