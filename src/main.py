@@ -1,3 +1,4 @@
+from collections.abc import Iterable
 from frankenfish_generator import (
     generate_datapack,
     write_datapack,
@@ -39,7 +40,7 @@ AQUACULTURE_FISH: Final = [
     "red_grouper",
     "tuna",
 ]
-NETHER_DEPTHS_FISH: Final = [
+NETHER_DEPTHS_FISH: Final[list[str | tuple[str, str]]] = [
     "lava_pufferfish",
     "obsidianfish",
     "searing_cod",
@@ -49,9 +50,29 @@ NETHER_DEPTHS_FISH: Final = [
     "magmacubefish",
     "glowdine",
     "soulsucker",
-    "fortress_grouper",
+    ("fortress_grouper", "fortressgrouper"),
     "eyeball_fish",
 ]
+
+
+def make_fish_list(
+    namespace: str,
+    input: Iterable[str | tuple[str, str]],
+) -> list[tuple[ResourceLocation, ResourceLocation]]:
+    result = list()
+    for fish in input:
+        if isinstance(fish, tuple):
+            result.append(
+                (
+                    ResourceLocation(namespace, fish[0]),
+                    ResourceLocation(namespace, fish[1]),
+                )
+            )
+        else:
+            result.append(
+                (ResourceLocation(namespace, fish), ResourceLocation(namespace, fish))
+            )
+    return result
 
 
 def main() -> None:
@@ -66,33 +87,9 @@ def main() -> None:
         case _:
             raise ValueError
 
-    vanilla_fish = list(
-        map(
-            lambda fish: (
-                ResourceLocation("minecraft", fish),
-                ResourceLocation("minecraft", fish),
-            ),
-            VANILLA_FISH,
-        )
-    )
-    aquaculture_fish = list(
-        map(
-            lambda fish: (
-                ResourceLocation("aquaculture", fish),
-                ResourceLocation("aquaculture", fish),
-            ),
-            AQUACULTURE_FISH,
-        )
-    )
-    nether_depths_fish = list(
-        map(
-            lambda fish: (
-                ResourceLocation("netherdepthsupgrade", fish),
-                ResourceLocation("netherdepthsupgrade", fish),
-            ),
-            NETHER_DEPTHS_FISH,
-        )
-    )
+    vanilla_fish = make_fish_list("minecraft", VANILLA_FISH)
+    aquaculture_fish = make_fish_list("aquaculture", AQUACULTURE_FISH)
+    nether_depths_fish = make_fish_list("netherdepthsupgrade", NETHER_DEPTHS_FISH)
 
     datapack_files = generate_datapack(
         vanilla_fish + aquaculture_fish + nether_depths_fish, mc_version

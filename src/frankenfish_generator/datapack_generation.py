@@ -19,7 +19,26 @@ TICK_TAG: Final = DatapackFile(
 
 TICK_FUNCTION: Final = DatapackFile(
     "data/frankenfish/functions/tick.mcfunction",
-    "execute as @e[type=lightning_bolt] at @s run function #frankenfish:fish_reviver",
+    "execute as @e[type=#frankenfish:lightning] at @s run function #frankenfish:fish_reviver",
+)
+
+LIGHTNING_TAG: Final = DatapackFile(
+    "data/frankenfish/tags/entity_types/lightning.json",
+    """
+    {
+        "values": [
+            "lightning_bolt",
+            {
+                "id": "ars_nouveau:an_lightning",
+                "required": false
+            },
+            {
+                "id": "ars_elemental:flash_lightning",
+                "required": false
+            }
+        ]
+    }
+    """,
 )
 
 
@@ -51,4 +70,4 @@ def generate_datapack(
     mcmeta = generate_mcmeta(minecraft_version)
     revivers = generate_fish_revivers(fishes, minecraft_version)
     reviver_tag = generate_fish_reviver_tag(fishes)
-    return revivers + [mcmeta, reviver_tag, TICK_TAG, TICK_FUNCTION]
+    return revivers + [mcmeta, reviver_tag, TICK_TAG, LIGHTNING_TAG, TICK_FUNCTION]
