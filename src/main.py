@@ -39,6 +39,19 @@ AQUACULTURE_FISH: Final = [
     "red_grouper",
     "tuna",
 ]
+NETHER_DEPTHS_FISH: Final = [
+    "lava_pufferfish",
+    "obsidianfish",
+    "searing_cod",
+    "bonefish",
+    "wither_bonefish",
+    "blazefish",
+    "magmacubefish",
+    "glowdine",
+    "soulsucker",
+    "fortress_grouper",
+    "eyeball_fish",
+]
 
 
 def main() -> None:
@@ -71,8 +84,19 @@ def main() -> None:
             AQUACULTURE_FISH,
         )
     )
+    nether_depths_fish = list(
+        map(
+            lambda fish: (
+                ResourceLocation("netherdepthsupgrade", fish),
+                ResourceLocation("netherdepthsupgrade", fish),
+            ),
+            NETHER_DEPTHS_FISH,
+        )
+    )
 
-    datapack_files = generate_datapack(vanilla_fish + aquaculture_fish, mc_version)
+    datapack_files = generate_datapack(
+        vanilla_fish + aquaculture_fish + nether_depths_fish, mc_version
+    )
     write_datapack(f"frankenfish-{args.minecraft_version}.zip", datapack_files)
 
 
