@@ -10,6 +10,7 @@ from .fish_detector_generation import (
     generate_fish_detectors,
     generate_fish_detector_tag,
 )
+from .loot_table_generation import generate_loot_tables
 
 
 TICK_TAG: Final = DatapackFile(
@@ -56,10 +57,12 @@ def generate_datapack(
     detectors = generate_fish_detectors(map(lambda f: f[0], fishes), minecraft_version)
     detector_tag = generate_fish_detector_tag(map(lambda f: f[0], fishes))
     revivers = generate_fish_revivers(fishes, minecraft_version)
+    loot_tables = generate_loot_tables(map(lambda f: f[0], fishes))
     return list(
         itertools.chain(
             detectors,
             revivers,
+            loot_tables,
             [mcmeta, detector_tag, TICK_TAG, LIGHTNING_TAG, TICK_FUNCTION],
         )
     )

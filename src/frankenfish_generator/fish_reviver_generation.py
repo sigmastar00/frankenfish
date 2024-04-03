@@ -36,13 +36,19 @@ def generate_fish_reviver(
 def generate_fish_reviver_1_19_2(
     fish_item: ResourceLocation, fish_entity: ResourceLocation
 ) -> DatapackFile:
+    if fish_item.namespace == "minecraft":
+        loot_table = f"frankenfish:revived_fish/{fish_item.path}"
+    else:
+        loot_table = f"frankenfish:revived_fish/{fish_item.namespace}/{fish_item.path}"
     function_src = """
         # give the fish resistance 5 so it doesn't die to lightning
+        # also give it a loot table that only drops the fish, to prevent duping fish drops
         summon %s ~ ~ ~ { \
-            ActiveEffects: [{Id: 11, Duration: 300, Amplifier: 5, ShowParticles: 1b}] \
+            ActiveEffects: [{Id: 11, Duration: 300, Amplifier: 5, ShowParticles: 1b}], \
+            DeathLootTable: "%s" \
         }
         kill @s
-    """ % (fish_entity)
+    """ % (fish_entity, loot_table)
     function_src = fix_whitespace(function_src)
 
     return DatapackFile(fish_reviver_path(fish_item), function_src)
