@@ -12,5 +12,12 @@ https://github.com/sigmastar00/frankenfish/assets/65141169/fc7707d6-1411-4354-a7
 
 ## Compatibility
 
-This datapack supports versions 1.19.2 and 1.20.1 of Minecraft. It also supports the [Aquaculture 2](https://www.curseforge.com/minecraft/mc-mods/aquaculture) mod. 
+This datapack supports versions 1.19.2 and 1.20.1 of Minecraft, and also features some mod support as well.
+
+The following mods can have their fish revived:
+* [Aquaculture 2](https://www.curseforge.com/minecraft/mc-mods/aquaculture) 
+* [Nether Depths Upgrade](https://modrinth.com/mod/nether-depths-upgrade).
+
+In addition, you can use lightning magic from [Ars Nouveau](https://modrinth.com/mod/ars-nouveau) and [Ars Elemental](https://www.curseforge.com/minecraft/mc-mods/ars-elemental) to revive your fish!
+
 Support for more versions and mods may be added in the future.
