@@ -1,5 +1,11 @@
 # Frankenfish
 
+[![Modrinth Version](https://img.shields.io/modrinth/v/PQ66njOr?logo=modrinth&label=modrinth&color=%2300af5c
+)](https://modrinth.com/datapack/frankenfish)
+[![CurseForge Version](https://img.shields.io/curseforge/v/990663?logo=curseforge&label=curseforge&color=%23f16436
+)](https://www.curseforge.com/minecraft/data-packs/frankenfish)
+
+
 Have you ever thought it was strange that the fishing rod only gives you dead fish?
 Have you ever thought it was strange that you can't use those fish to make your aquarium, and instead must travel the world
 looking for separate, living, fish?
