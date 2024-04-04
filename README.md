@@ -22,7 +22,7 @@ This datapack supports versions 1.19.2 and 1.20.1 of Minecraft, and also feature
 
 The following mods can have their fish revived:
 * [Aquaculture 2](https://www.curseforge.com/minecraft/mc-mods/aquaculture) 
-* [Nether Depths Upgrade](https://modrinth.com/mod/nether-depths-upgrade).
+* [Nether Depths Upgrade](https://modrinth.com/mod/nether-depths-upgrade)
 
 In addition, you can use lightning magic from [Ars Nouveau](https://modrinth.com/mod/ars-nouveau) and [Ars Elemental](https://www.curseforge.com/minecraft/mc-mods/ars-elemental) to revive your fish!
 
