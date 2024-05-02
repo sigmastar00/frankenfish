@@ -53,24 +53,45 @@ NETHER_DEPTHS_FISH: Final[list[str | tuple[str, str]]] = [
     ("fortress_grouper", "fortressgrouper"),
     "eyeball_fish",
 ]
+ENVIRONMENTAL_FISH: Final = ["koi"]
+CRITTERS_AND_COMPANIONS_FISH: Final = ["koi_fish"]
+ALEXS_MOBS_FISH: Final[list[str | tuple[str, str, str]]] = [
+    ("blobfish", "blobfish", "BlobfishScale: 1.0f"),
+    "cosmic_cod",
+    "flying_fish",
+]
 
 
 def make_fish_list(
     namespace: str,
-    input: Iterable[str | tuple[str, str]],
-) -> list[tuple[ResourceLocation, ResourceLocation]]:
-    result = list()
+    input: Iterable[str | tuple[str, str] | tuple[str, str, str | None]],
+) -> list[tuple[ResourceLocation, ResourceLocation, str | None]]:
+    result: list[tuple[ResourceLocation, ResourceLocation, str | None]] = []
     for fish in input:
         if isinstance(fish, tuple):
-            result.append(
-                (
-                    ResourceLocation(namespace, fish[0]),
-                    ResourceLocation(namespace, fish[1]),
+            if len(fish) == 2:
+                result.append(
+                    (
+                        ResourceLocation(namespace, fish[0]),
+                        ResourceLocation(namespace, fish[1]),
+                        None,
+                    )
                 )
-            )
+            elif len(fish) == 3:
+                result.append(
+                    (
+                        ResourceLocation(namespace, fish[0]),
+                        ResourceLocation(namespace, fish[1]),
+                        fish[2],
+                    )
+                )
         else:
             result.append(
-                (ResourceLocation(namespace, fish), ResourceLocation(namespace, fish))
+                (
+                    ResourceLocation(namespace, fish),
+                    ResourceLocation(namespace, fish),
+                    None,
+                )
             )
     return result
 
@@ -90,10 +111,32 @@ def main() -> None:
     vanilla_fish = make_fish_list("minecraft", VANILLA_FISH)
     aquaculture_fish = make_fish_list("aquaculture", AQUACULTURE_FISH)
     nether_depths_fish = make_fish_list("netherdepthsupgrade", NETHER_DEPTHS_FISH)
-
-    datapack_files = generate_datapack(
-        vanilla_fish + aquaculture_fish + nether_depths_fish, mc_version
+    environmental_fish = make_fish_list("environmental", ENVIRONMENTAL_FISH)
+    critters_and_companions_fish = make_fish_list(
+        "crittersandcompanions", CRITTERS_AND_COMPANIONS_FISH
     )
+    alexs_mobs_fish = make_fish_list("alexsmobs", ALEXS_MOBS_FISH)
+
+    match mc_version:
+        case MinecraftVersion.V1_19_2:
+            all_fish = (
+                vanilla_fish
+                + aquaculture_fish
+                + nether_depths_fish
+                + environmental_fish
+                + critters_and_companions_fish
+                + alexs_mobs_fish
+            )
+        case MinecraftVersion.V1_20_1:
+            all_fish = (
+                vanilla_fish
+                + aquaculture_fish
+                + nether_depths_fish
+                + critters_and_companions_fish
+                + alexs_mobs_fish
+            )
+
+    datapack_files = generate_datapack(all_fish, mc_version)
     write_datapack(f"frankenfish-{args.minecraft_version}.zip", datapack_files)
 
 

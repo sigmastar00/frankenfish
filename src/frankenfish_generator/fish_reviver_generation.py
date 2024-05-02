@@ -7,11 +7,13 @@ from itertools import starmap
 
 
 def generate_fish_revivers(
-    fishes: Iterable[tuple[ResourceLocation, ResourceLocation]],
+    fishes: Iterable[tuple[ResourceLocation, ResourceLocation, str | None]],
     minecraft_version: MinecraftVersion,
 ) -> Iterable[DatapackFile]:
     return starmap(
-        lambda item, entity: generate_fish_reviver(item, entity, minecraft_version),
+        lambda item, entity, extra: generate_fish_reviver(
+            item, entity, extra, minecraft_version
+        ),
         fishes,
     )
 
@@ -26,15 +28,16 @@ def fish_reviver_path(fish_item: ResourceLocation) -> str:
 def generate_fish_reviver(
     fish_item: ResourceLocation,
     fish_entity: ResourceLocation,
+    extra_data: str | None,
     minecraft_version: MinecraftVersion,
 ) -> DatapackFile:
     match minecraft_version:
         case MinecraftVersion.V1_19_2 | MinecraftVersion.V1_20_1:
-            return generate_fish_reviver_1_19_2(fish_item, fish_entity)
+            return generate_fish_reviver_1_19_2(fish_item, fish_entity, extra_data)
 
 
 def generate_fish_reviver_1_19_2(
-    fish_item: ResourceLocation, fish_entity: ResourceLocation
+    fish_item: ResourceLocation, fish_entity: ResourceLocation, extra_data: str | None
 ) -> DatapackFile:
     if fish_item.namespace == "minecraft":
         loot_table = f"frankenfish:revived_fish/{fish_item.path}"
@@ -43,12 +46,17 @@ def generate_fish_reviver_1_19_2(
     function_src = """
         # give the fish resistance 5 so it doesn't die to lightning
         # also give it a loot table that only drops the fish, to prevent duping fish drops
-        summon %s ~ ~ ~ { \
+        summon %(fish_entity)s ~ ~ ~ { \
             ActiveEffects: [{Id: 11, Duration: 300, Amplifier: 5, ShowParticles: 1b}], \
-            DeathLootTable: "%s" \
+            DeathLootTable: "%(loot_table)s", \
+            %(extra_data)s \
         }
         kill @s
-    """ % (fish_entity, loot_table)
+    """ % {
+        "fish_entity": fish_entity,
+        "loot_table": loot_table,
+        "extra_data": extra_data or "",
+    }
     function_src = fix_whitespace(function_src)
 
     return DatapackFile(fish_reviver_path(fish_item), function_src)

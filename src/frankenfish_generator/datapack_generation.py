@@ -50,7 +50,7 @@ LIGHTNING_TAG: Final = DatapackFile(
 
 
 def generate_datapack(
-    fishes: Iterable[tuple[ResourceLocation, ResourceLocation]],
+    fishes: Iterable[tuple[ResourceLocation, ResourceLocation, str | None]],
     minecraft_version: MinecraftVersion,
 ) -> list[DatapackFile]:
     mcmeta = generate_mcmeta(minecraft_version)
